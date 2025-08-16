@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Link, Sparkles, RefreshCw } from 'lucide-react';
+import SplashScreen from './components/SplashScreen';
 import VideoInfo from './components/VideoInfo';
 import ProgressBar from './components/ProgressBar';
 import Toast from './components/Toast';
 import { useVideoDownloader } from './hooks/useVideoDownloader';
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [url, setUrl] = useState('');
   const [toast, setToast] = useState<{
     message: string;
@@ -27,6 +29,10 @@ function App() {
     downloadVideo,
     resetState,
   } = useVideoDownloader('http://127.0.0.1:8000');
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+  };
 
   useEffect(() => {
     // Register service worker for PWA
@@ -87,6 +93,10 @@ function App() {
       return false;
     }
   };
+
+  if (showSplash) {
+    return <SplashScreen onComplete={handleSplashComplete} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
