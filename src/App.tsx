@@ -28,7 +28,7 @@ function App() {
     fetchVideoInfo,
     downloadVideo,
     resetState,
-  } = useVideoDownloader('https://jai14-videodownloader.hf.space');
+  } = useVideoDownloader('https://jai14-videodownloader.hf.space/');
 
   const handleSplashComplete = () => {
     setShowSplash(false);
